@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROAMIO AI</title>
+    <link rel="stylesheet" href="C:\Users\DeLL\Documents\projects\ROAMIO\static\style.css">
+</head>
+<body>
+
+    <!-- Background Layers -->
+    <div class="noise"></div>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+    <div class="grid-overlay"></div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">ROAMIO//AI</div>
+        <ul class="nav-links">
+            <li><a href="#hero">HOME</a></li>
+            <li><a href="#planner">PLANNER</a></li>
+            <li><a href="#dashboard">DASHBOARD</a></li>
+            <li><a href="#founders">FOUNDERS</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero reveal" id="hero">
+        <div class="hero-left">
+            <span class="tag">AI SYSTEM FOR STUDENT SURVIVAL</span>
+            <h1>Turn your <span>messy day</span> into a plan that actually works.</h1>
+            <p>
+                Roamio AI creates a personalized daily plan based on your mood, energy,
+                time, budget, and weather — designed for students surviving deadlines,
+                burnout, low budgets, and random mood swings.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#planner" class="hero-btn primary">Generate My Day</a>
+                <a href="#dashboard" class="hero-btn secondary">Open Dashboard</a>
+            </div>
+
+            <div class="hero-mini-stats">
+                <div class="mini-stat">
+                    <h3>24/7</h3>
+                    <p>AI support for student chaos</p>
+                </div>
+                <div class="mini-stat">
+                    <h3>∞</h3>
+                    <p>possible day combinations</p>
+                </div>
+                <div class="mini-stat">
+                    <h3>REAL</h3>
+                    <p>not generic productivity advice</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-right">
+            <div class="ai-card floating">
+                <div class="ai-card-top">
+                    <span class="dot red"></span>
+                    <span class="dot ash"></span>
+                    <span class="dot purple"></span>
+                </div>
+                <p class="ai-label">SYSTEM OUTPUT</p>
+                <h3>Tonight’s Suggested Routine</h3>
+                <div class="task-chip">📚 45-min assignment sprint</div>
+                <div class="task-chip">☕ cheap coffee / hydration break</div>
+                <div class="task-chip">🎧 reset playlist + low-effort walk</div>
+                <div class="task-chip">🍜 affordable comfort food idea</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY SECTION -->
+    <section class="why-section reveal">
+        <div class="section-heading">
+            <span class="section-tag">WHY THIS EXISTS</span>
+            <h2>Because student life is never perfectly aesthetic.</h2>
+        </div>
+
+        <div class="why-grid">
+            <div class="why-card">
+                <h3>☠ Burnout-Aware</h3>
+                <p>Some days are grind mode. Some days are survival mode. The system adapts.</p>
+            </div>
+            <div class="why-card">
+                <h3>💸 Budget Conscious</h3>
+                <p>Your plan shouldn’t assume you casually have ₹700 to spend every day.</p>
+            </div>
+            <div class="why-card">
+                <h3>🌧 Real-World Inputs</h3>
+                <p>Rainy weather, low energy, little time — the AI changes with your reality.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PLANNER -->
+    <section class="planner-section reveal" id="planner">
+        <div class="planner-wrapper">
+            <div class="planner-heading">
+                <span class="section-tag">INPUT TERMINAL</span>
+                <h2>Feed your vibe into the machine.</h2>
+            </div>
+
+            <form method="POST" class="planner-form">
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label>Mood</label>
+                        <select name="mood">
+                            <option>bored 😐</option>
+                            <option>happy 😊</option>
+                            <option>tired 😴</option>
+                            <option>stressed 😵</option>
+                            <option>motivated 🚀</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Energy</label>
+                        <select name="energy">
+                            <option>low</option>
+                            <option>medium</option>
+                            <option>high</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Budget</label>
+                        <input type="text" name="budget" placeholder="₹200">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Time Available</label>
+                        <input type="text" name="time" placeholder="2 hours">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Weather</label>
+                        <select name="weather">
+                            <option>Sunny ☀️</option>
+                            <option>Rainy 🌧️</option>
+                            <option>Cloudy ☁️</option>
+                            <option>Windy 🌬️</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Priority</label>
+                        <input type="text" name="priority" placeholder="Assignments / Chill / Social">
+                    </div>
+                </div>
+
+                <button type="submit" class="generate-btn">GENERATE PLAN</button>
+            </form>
+
+            {% if result %}
+            <div class="result-box">
+                <div class="result-top">
+                    <span>AI GENERATED OUTPUT</span>
+                    <button class="regen-btn" disabled>REGENERATE</button>
+                </div>
+                <div class="result-content">
+                    <pre>{{ result }}</pre>
+                </div>
+            </div>
+            {% else %}
+            <div class="result-placeholder">
+                <div class="placeholder-icon">⛓</div>
+                <h3>Your generated plan will appear here</h3>
+                <p>
+                    Once the Flask + OpenAI connection is added, the response will render here.
+                </p>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+<!-- ROAMIO SURVIVAL ENGINE -->
+<section class="experience-section reveal" id="dashboard">
+    <div class="section-heading">
+        <span class="section-tag">ROAMIO SURVIVAL ENGINE</span>
+        <h2>Pick your current chaos.</h2>
+    </div>
+
+    <div class="experience-grid">
+
+        <!-- LEFT SIDE -->
+        <div class="experience-card large-card">
+            <div class="card-top">
+                <h3>Choose Your Survival Mode</h3>
+                <span>Interactive</span>
+            </div>
+
+            <div class="mode-grid">
+                <button class="mode-chip active-red" onclick="showMode('deadline')">☠ Deadline Mode</button>
+                <button class="mode-chip active-purple" onclick="showMode('focus')">🧠 Focus Lock</button>
+                <button class="mode-chip" onclick="showMode('burnout')">😵 Burnout Recovery</button>
+                <button class="mode-chip" onclick="showMode('budget')">💸 Budget Day</button>
+                <button class="mode-chip" onclick="showMode('rainy')">🌧 Rainy Day Reset</button>
+                <button class="mode-chip" onclick="showMode('social')">🎉 Social Recharge</button>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="experience-card small-card">
+            <div class="card-top">
+                <h3>Current Mode</h3>
+                <span id="modeLabel">Deadline Mode</span>
+            </div>
+
+            <div class="mode-status-box">
+                <div class="status-pill" id="modeMood">High Pressure</div>
+                <div class="status-pill" id="modeEnergy">Focused Survival</div>
+                <div class="status-pill" id="modeBudget">Low Distraction</div>
+            </div>
+        </div>
+
+        <div class="experience-card small-card">
+            <div class="card-top">
+                <h3>ROAMIO Traits</h3>
+                <span>Always Active</span>
+            </div>
+
+            <div class="trait-stack">
+                <div class="trait-pill">Mood-Aware</div>
+                <div class="trait-pill">Budget-Smart</div>
+                <div class="trait-pill">Weather-Based</div>
+                <div class="trait-pill">Student Friendly</div>
+                <div class="trait-pill">Low-Energy Safe</div>
+                <div class="trait-pill">Quick Rescue</div>
+            </div>
+        </div>
+
+        <!-- OUTPUT PANEL -->
+        <div class="experience-card output-card">
+            <div class="card-top">
+                <h3>Instant Survival Plan</h3>
+            </div>
+
+            <div class="mode-output" id="modeOutput">
+                <h4>☠ Deadline Mode Activated</h4>
+                <div class="output-item"><strong>📚 Productive Task:</strong> Do a 40-minute focused assignment sprint with your hardest task first.</div>
+                <div class="output-item"><strong>🎧 Fun Activity:</strong> Reward yourself with 15 minutes of music, memes, or a comfort episode after the sprint.</div>
+                <div class="output-item"><strong>😌 Self-Care:</strong> Hydrate, stretch your neck/back, and avoid doom scrolling between tasks.</div>
+                <div class="output-item"><strong>🍜 Food Suggestion:</strong> Go for something quick, warm, and filling like maggi, pasta, or a sandwich.</div>
+                <div class="output-item"><strong>⚡ Bonus Tip:</strong> Put your phone on DND for one power hour and survive first, romanticize later.</div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+    <!-- FOUNDERS -->
+    <section class="founders-section reveal" id="founders">
+        <div class="section-heading">
+            <span class="section-tag">FOUNDERS</span>
+            <h2>The people behind the machine.</h2>
+            <p>Meet the team that built ROAMIO AI.</p>
+        </div>
+
+        <div class="founders-grid">
+            <div class="founder-card">
+                <div class="founder-image-wrapper">
+                    <img src="{{ url_for('static', filename='images/anam.jpg') }}" alt="Anam" class="founder-image">
+                </div>
+                <h3>Anam</h3>
+                <p class="role">Frontend Designer</p>
+                <p>Designed the visual identity, dark UI theme, layout, and interactive user experience.</p>
+            </div>
+
+            <div class="founder-card">
+                <div class="founder-image-wrapper">
+                    <img src="{{ url_for('static', filename='images/member2.jpg') }}" alt="Founder 2" class="founder-image">
+                </div>
+                <h3>Teammate 2</h3>
+                <p class="role">Backend + AI</p>
+                <p>Handled Flask integration, AI connectivity, and response generation logic.</p>
+            </div>
+
+            <div class="founder-card">
+                <div class="founder-image-wrapper">
+                    <img src="{{ url_for('static', filename='images/member3.jpg') }}" alt="Founder 3" class="founder-image">
+                </div>
+                <h3>Teammate 3</h3>
+                <p class="role">Logic + Styling</p>
+                <p>Worked on form logic, project structure, and extra feature enhancements.</p>
+            </div>
+
+            <div class="founder-card">
+                <div class="founder-image-wrapper">
+                    <img src="{{ url_for('static', filename='images/member4.jpg') }}" alt="Founder 4" class="founder-image">
+                </div>
+                <h3>Teammate 4</h3>
+                <p class="role">Testing + Demo</p>
+                <p>Handled testing, debugging, integration checks, and final presentation prep.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>ROAMIO AI // built for deadlines, moods, burnout, and survival</p>
+    </footer>
+<script>
+    const modeData = {
+        deadline: {
+            title: "☠ Deadline Mode Activated",
+            label: "Deadline Mode",
+            pills: ["High Pressure", "Focused Survival", "Low Distraction"],
+            plan: [
+                "📚 <strong>Productive Task:</strong> Do a 40-minute focused assignment sprint with your hardest task first.",
+                "🎧 <strong>Fun Activity:</strong> Reward yourself with 15 minutes of music, memes, or a comfort episode after the sprint.",
+                "😌 <strong>Self-Care:</strong> Hydrate, stretch your neck/back, and avoid doom scrolling between tasks.",
+                "🍜 <strong>Food Suggestion:</strong> Go for something quick, warm, and filling like maggi, pasta, or a sandwich.",
+                "⚡ <strong>Bonus Tip:</strong> Put your phone on DND for one power hour and survive first, romanticize later."
+            ]
+        },
+        focus: {
+            title: "🧠 Focus Lock Activated",
+            label: "Focus Lock",
+            pills: ["Deep Work", "High Clarity", "Minimal Chaos"],
+            plan: [
+                "📚 <strong>Productive Task:</strong> Work in 50-minute deep focus blocks and complete your most important academic task.",
+                "🎧 <strong>Fun Activity:</strong> Use lo-fi or ambient sound as a reward between study sessions.",
+                "😌 <strong>Self-Care:</strong> Keep water beside you and take eye breaks every 45 minutes.",
+                "🍜 <strong>Food Suggestion:</strong> Choose something light but energizing like toast, coffee, fruit, or a wrap.",
+                "⚡ <strong>Bonus Tip:</strong> Clear your desk before starting — visual mess kills mental lock-in."
+            ]
+        },
+        burnout: {
+            title: "😵 Burnout Recovery Activated",
+            label: "Burnout Recovery",
+            pills: ["Low Energy", "Gentle Recovery", "No Overload"],
+            plan: [
+                "📚 <strong>Productive Task:</strong> Do only one light but meaningful task today — enough to reduce guilt, not destroy you.",
+                "🎧 <strong>Fun Activity:</strong> Watch something comforting, take a slow walk, or just listen to music without multitasking.",
+                "😌 <strong>Self-Care:</strong> Prioritize rest, hydration, and staying off overstimulating apps for a bit.",
+                "🍜 <strong>Food Suggestion:</strong> Have something easy and comforting like soup, noodles, toast, or chai + snacks.",
+                "⚡ <strong>Bonus Tip:</strong> You do not need to optimize your life today. Just recover enough to function tomorrow."
+            ]
+        },
+        budget: {
+            title: "💸 Budget Day Activated",
+            label: "Budget Day",
+            pills: ["Low Spend", "Campus Safe", "Affordable Comfort"],
+            plan: [
+                "📚 <strong>Productive Task:</strong> Finish one useful task from college using free tools and campus/library spaces.",
+                "🎧 <strong>Fun Activity:</strong> Try a no-spend reset: playlist walk, journaling, or a photo dump session.",
+                "😌 <strong>Self-Care:</strong> Keep the day simple and avoid unnecessary impulse spending.",
+                "🍜 <strong>Food Suggestion:</strong> Go for affordable comfort like maggi, chai, sandwiches, or canteen snacks.",
+                "⚡ <strong>Bonus Tip:</strong> Budget days feel better when they’re intentional, not depressing — romanticize the low-cost era."
+            ]
+        },
+        rainy: {
+            title: "🌧 Rainy Day Reset Activated",
+            label: "Rainy Day Reset",
+            pills: ["Indoor Vibes", "Cozy Productivity", "Low Mobility"],
+            plan: [
+                "📚 <strong>Productive Task:</strong> Use the indoor energy to finish notes, assignments, or pending academic cleanup.",
+                "🎧 <strong>Fun Activity:</strong> Create a rainy playlist, read, or have a comfort-screen-time break.",
+                "😌 <strong>Self-Care:</strong> Slow down, stay warm, and avoid letting the weather kill your whole routine.",
+                "🍜 <strong>Food Suggestion:</strong> Best choices: chai, pakora, noodles, coffee, soup, or anything cozy.",
+                "⚡ <strong>Bonus Tip:</strong> Rainy days are perfect for soft productivity — not pressure, just progress."
+            ]
+        },
+        social: {
+            title: "🎉 Social Recharge Activated",
+            label: "Social Recharge",
+            pills: ["Fun Energy", "People Mode", "Recharge Through Vibes"],
+            plan: [
+                "📚 <strong>Productive Task:</strong> Finish one small important task before going full social mode.",
+                "🎧 <strong>Fun Activity:</strong> Meet friends, go for a walk, café stop, campus hang, or low-pressure outing.",
+                "😌 <strong>Self-Care:</strong> Social energy is fun, but protect your battery too — don’t overextend.",
+                "🍜 <strong>Food Suggestion:</strong> Grab something snackable and fun like fries, momos, iced coffee, or rolls.",
+                "⚡ <strong>Bonus Tip:</strong> Make the memory, but come back with your assignments still alive."
+            ]
+        }
+    };
+
+    function showMode(mode) {
+        const data = modeData[mode];
+        const output = document.getElementById("modeOutput");
+        const label = document.getElementById("modeLabel");
+        const pills = document.querySelectorAll(".status-pill");
+        const buttons = document.querySelectorAll(".mode-chip");
+
+        label.textContent = data.label;
+
+        pills[0].textContent = data.pills[0];
+        pills[1].textContent = data.pills[1];
+        pills[2].textContent = data.pills[2];
+
+        output.innerHTML = `
+            <h4>${data.title}</h4>
+            ${data.plan.map(item => `<div class="output-item">${item}</div>`).join("")}
+        `;
+
+        buttons.forEach(btn => btn.classList.remove("active"));
+        event.target.classList.add("active");
+    }
+</script>
+</body>
+</html>
